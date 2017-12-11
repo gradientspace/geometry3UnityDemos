@@ -34,6 +34,7 @@ public class ReduceDemo : MonoBehaviour
         meshGO = g3UnityUtils.CreateMeshGO("start_mesh", startMesh, wireframeShader);
     }
 	
+
 	// Update is called once per frame
 	void Update () {
         if ( Input.GetKeyUp(KeyCode.R) ) {
@@ -53,7 +54,7 @@ public class ReduceDemo : MonoBehaviour
         int N = 100;
         foreach (int i in reduce.ReduceToTriangleCount_Interactive(500) ) {
             if (iter++ % N == 0) {
-                g3UnityUtils.SetGOMesh(meshGO, new DMesh3(curMesh, true));
+                g3UnityUtils.SetGOMesh(meshGO, curMesh);
                 yield return new WaitForSecondsRealtime(0.001f);
             }
         }
