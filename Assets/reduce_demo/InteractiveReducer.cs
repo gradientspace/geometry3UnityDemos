@@ -5,6 +5,8 @@ namespace g3
 {
     public class InteractiveReducer : Reducer
     {
+        int PerFrameCount = 1;
+
         public InteractiveReducer(DMesh3 mesh) : base(mesh)
         {
         }
@@ -32,6 +34,7 @@ namespace g3
             begin_ops();
 
             begin_collapse();
+            int count = PerFrameCount;
             while (EdgeQueue.Count > 0) {
 
                 // termination criteria
@@ -53,7 +56,10 @@ namespace g3
                     vertQuadrics[vKept] = EdgeQuadrics[eid].q;
                     UpdateNeighbours(vKept);
                 }
-                yield return 0;
+                if (count-- == 0) {
+                    count = PerFrameCount;
+                    yield return 0;
+                }
             }
             end_collapse();
             end_ops();

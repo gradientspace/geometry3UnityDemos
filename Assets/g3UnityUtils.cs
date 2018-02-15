@@ -48,10 +48,12 @@ public class g3UnityUtils
 
 
 
-
-    public static Mesh DMeshToUnityMesh(DMesh3 m)
+    /// <summary>
+    /// Convert DMesh3 to unity Mesh
+    /// </summary>
+    public static Mesh DMeshToUnityMesh(DMesh3 m, bool bLimitTo64k = false)
     {
-        if (m.MaxVertexID > 65535 || m.MaxTriangleID > 65535) {
+        if (bLimitTo64k && (m.MaxVertexID > 65535 || m.MaxTriangleID > 65535) ) {
             Debug.Log("g3UnityUtils.DMeshToUnityMesh: attempted to convert DMesh larger than 65535 verts/tris, not supported by Unity!");
             return null;
         }
@@ -73,8 +75,28 @@ public class g3UnityUtils
     }
 
 
+    /// <summary>
+    /// Convert unity Mesh to a g3.DMesh3. Ignores UV's.
+    /// </summary>
+    public static DMesh3 UnityMeshToDMesh(Mesh mesh)
+    {
+        Vector3[] mesh_vertices = mesh.vertices;
+        Vector3f[] dmesh_vertices = new Vector3f[mesh_vertices.Length];
+        for (int i = 0; i < mesh.vertexCount; ++i)
+            dmesh_vertices[i] = mesh_vertices[i];
 
+        Vector3[] mesh_normals = mesh.normals;
+        if (mesh_normals != null) {
+            Vector3f[] dmesh_normals = new Vector3f[mesh_vertices.Length];
+            for (int i = 0; i < mesh.vertexCount; ++i)
+                dmesh_normals[i] = mesh_normals[i];
 
+            return DMesh3Builder.Build(dmesh_vertices, mesh.triangles, dmesh_normals);
+
+        } else {
+            return DMesh3Builder.Build<Vector3f,int,Vector3f>(dmesh_vertices, mesh.triangles, null, null);
+        }
+    }
 
 
 
