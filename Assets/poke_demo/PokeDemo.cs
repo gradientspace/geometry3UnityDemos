@@ -20,7 +20,7 @@ public class PokeDemo : MonoBehaviour
     void Start() {
         // find path to sample file
         string curPath = Application.dataPath;
-        string filePath = Path.Combine(curPath, "..\\sample_files", "bunny_solid.obj");
+        string filePath = Path.Combine(curPath, Path.Combine("..\\sample_files", "bunny_solid.obj"));
 
         // load sample file, convert to unity coordinate system, translate and scale to origin
         Sphere3Generator_NormalizedCube spheregen = new Sphere3Generator_NormalizedCube() {
