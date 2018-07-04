@@ -29,7 +29,7 @@ public class PokeDemo : MonoBehaviour
         sphereMesh = spheregen.Generate().MakeDMesh();
 
         // load wireframe shader
-        Material wireframeShader = g3UnityUtils.SafeLoadMaterial("wireframe_shader/Wireframe");
+        Material wireframeShader = g3UnityUtils.SafeLoadMaterial("poke_mat");
 
         // create initial mesh
         meshGO = g3UnityUtils.CreateMeshGO("sphere", sphereMesh, wireframeShader);
@@ -47,7 +47,7 @@ public class PokeDemo : MonoBehaviour
             remove_old_vertices(point_to_vid_map, tmp);
             g3UnityUtils.SetGOMesh(meshGO, tmp);
 
-            StandardMeshWriter.WriteMesh("c:\\scratch\\FULL_COLLAPSE.obj", tmp, WriteOptions.Defaults);
+            //StandardMeshWriter.WriteMesh("c:\\scratch\\FULL_COLLAPSE.obj", tmp, WriteOptions.Defaults);
         }
     }
 
