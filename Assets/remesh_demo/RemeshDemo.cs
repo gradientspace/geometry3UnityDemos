@@ -88,14 +88,14 @@ public class RemeshDemo : MonoBehaviour
 
             curMesh = new DMesh3(startMesh);
             remesh = make_remesher(curMesh);
-            active_remesh = StartCoroutine(reduce_playback());
+            active_remesh = StartCoroutine(remesh_playback());
         }
 
         // if we are looping, restart
         if (in_loop && active_remesh == null) {
             curMesh = new DMesh3(startMesh);
             remesh = make_remesher(curMesh);
-            active_remesh = StartCoroutine(reduce_playback());
+            active_remesh = StartCoroutine(remesh_playback());
         }
     }
 
@@ -127,17 +127,25 @@ public class RemeshDemo : MonoBehaviour
     }
 
 
-    IEnumerator reduce_playback()
+    IEnumerator remesh_playback()
     {
         g3UnityUtils.SetGOMesh(meshGO, curMesh);
         yield return new WaitForSecondsRealtime(FrameDelayS);
 
-        foreach (int i in remesh.InteractiveRemesh(RemeshPasses) ) {
+        foreach (int i in InteractiveRemesh(remesh, RemeshPasses) ) {
             g3UnityUtils.SetGOMesh(meshGO, curMesh);
             yield return new WaitForSecondsRealtime(FrameDelayS);
         }
         yield return new WaitForSecondsRealtime(1.0f);
         active_remesh = null;
+    }
+
+
+    IEnumerable<int> InteractiveRemesh(Remesher r, int nPasses) {
+        for (int k = 0; k < nPasses; ++k) {
+            r.BasicRemeshPass();
+            yield return k;
+        }
     }
 
 }

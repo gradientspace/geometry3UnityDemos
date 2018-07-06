@@ -22,5 +22,15 @@ namespace g3
 
 
 
+        public static IEnumerable<int> InteractiveRemesh(Remesher r, int nPasses)
+        {
+            for (int k = 0; k < nPasses; ++k) {
+                r.BasicRemeshPass();
+                yield return k;
+            }
+        }
+
+
+
     }
 }

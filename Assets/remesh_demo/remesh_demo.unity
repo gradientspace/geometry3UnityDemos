@@ -221,13 +221,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RemeshPasses: 20
   EdgeLengthMultiplier: 0.5
-  SmoothSpeed: 0.5
+  SmoothSpeed: 1
   Reproject: 1
   PreserveBoundary: 1
   RemeshBoundary: 1
   Loop: 0
-  FrameDelayS: 0.1
-  LoadSampleMesh: 1
+  FrameDelayS: 0.5
+  LoadSampleMesh: 0
   FlipLeftRight: 0
   SampleFileName: bunny_open.obj
 --- !u!114 &386732440
