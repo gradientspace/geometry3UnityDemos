@@ -4,4 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/remesh_demo/remesh_demo.unity
+    guid: 86d49a19a7daba1478b4eda630f2cef8
+  m_configObjects: {}

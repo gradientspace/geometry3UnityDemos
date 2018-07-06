@@ -50,9 +50,9 @@ namespace g3
                 TargetObject.transform.rotation = new_rotation;
             }
 
-
             last_mouse_pos = Input.mousePosition;
         }
+
 
     }
 
